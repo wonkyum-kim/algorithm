@@ -1,0 +1,41 @@
+/*Selection Sort C++*/
+/*****2020.07.07*****/
+
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+template<typename T>
+void selection_sort(vector<T>& vec, const int& n)
+{
+	for (int i = 0; i < n - 1; ++i)
+	{
+		int min_index = i;
+
+		for (int j = i + 1; j < n; ++j)
+		{
+			if (vec[min_index] > vec[j])
+				min_index = j;
+		}
+
+		//exchange
+		swap(vec[min_index], vec[i]);
+	}
+}
+
+template<typename T>
+void print_sort(vector<T>& vec, const int& n)
+{
+	for (int i = 0; i < n; ++i)
+		cout << vec[i] << " ";
+}
+
+int main()
+{
+	vector<int> vec{ 3,4,2,1 };
+	int n = vec.size();
+	selection_sort(vec, n);
+	print_sort(vec, n);
+	return 0;
+}
