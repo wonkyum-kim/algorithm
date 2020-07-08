@@ -1,1 +1,70 @@
+/****merge sort****/
+/*****20.07.08*****/
 
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+template<typename T>
+vector<T> merge(const vector<T>& A, const vector<T>& B) {
+
+	//-------------a case of empty vectors----------------//
+
+	if (A.empty()) {
+		return B;
+	}
+	else if (B.empty()) {
+		return A;
+	}
+
+	//--------------merge two vectors into a new vector ---------------//
+
+	vector<T> merged;
+	merged.reserve(A.size() + B.size());	
+
+	size_t current_a = 0, current_b = 0;	/* currnet indices of vectors*/
+
+	while (current_a < A.size() && current_b < B.size()){
+
+		if (A[current_a] <= B[current_b]) {
+			merged.push_back(A[current_a++]);	/* I will chagne this code by using move fuction someday. */
+			if (current_a == A.size()) {
+				merged.insert(merged.end(), B.begin() + current_b, B.end());
+				return merged;
+			}
+		}
+		else if (A[current_a] > B[current_b]) {
+			merged.push_back(B[current_b++]);	/* I will chagne this code by using move fuction someday. */
+			if (current_b == B.size()) {
+				merged.insert(merged.end(), A.begin() + current_a, A.end());
+				return merged;
+			}
+		}
+	}
+	return merged;
+}
+
+template<typename T>
+vector<T> merge_sort(const vector<T>& data) {
+
+	//-------------seperate vectors --------------//
+
+	if (data.size() <= 1) {
+		return data;
+	}
+
+	//---------- devide and conquer--------------//
+	size_t mid = data.size() / 2;
+	const auto left = merge_sort(vector<T>(data.begin(), data.begin() + mid));
+	const auto right = merge_sort(vector<T>(data.begin() + mid, data.end()));	/*I have to check this code someday */
+	return merge(left, right);
+}
+
+int main() {
+	auto merged = merge_sort(vector<int>{8, 5, 1, 4, 2, 3, 7, 6});
+	for (int num : merged) {
+		cout << num << " ";
+	}
+	return 0;
+}
