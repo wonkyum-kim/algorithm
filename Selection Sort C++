@@ -27,7 +27,7 @@ void selection_sort(vector<T>& vec, const int& n)
 template<typename T>
 void print_sort(vector<T>& vec, const int& n)
 {
-	for (auto& i : vec)
+	for (const auto& i : vec)
 		cout << i << " ";
 }
 
