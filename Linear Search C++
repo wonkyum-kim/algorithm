@@ -1,0 +1,16 @@
+#include <vector>
+
+using namespace std;
+
+template<typename T>
+int linear_search(vector<T>& vec, int len, T target)
+{
+
+	for (auto& i : vec)
+	{
+		if (target == i)
+			return i;
+	}
+  
+	return -1;
+}
