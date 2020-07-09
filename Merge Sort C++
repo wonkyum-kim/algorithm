@@ -6,10 +6,12 @@
 
 using namespace std;
 
+//-------------------------------------------------------------------------------------------------------------------------------------
+
 template<typename T>
 vector<T> merge(const vector<T>& A, const vector<T>& B) {
 
-	//-------------a case of empty vectors----------------//
+	//*******************a case of empty vectors*********************//
 
 	if (A.empty()) {
 		return B;
@@ -18,7 +20,7 @@ vector<T> merge(const vector<T>& A, const vector<T>& B) {
 		return A;
 	}
 
-	//--------------merge two vectors into a new vector ---------------//
+	//*********************merge two vectors into a new vector **************************//
 
 	vector<T> merged;
 	merged.reserve(A.size() + B.size());	
@@ -45,25 +47,29 @@ vector<T> merge(const vector<T>& A, const vector<T>& B) {
 	return merged;
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------
+
 template<typename T>
 vector<T> merge_sort(const vector<T>& data) {
 
-	//-------------seperate vectors --------------//
+	//*************************seperate vectors*************************//
 
 	if (data.size() <= 1) {
 		return data;
 	}
 
-	//---------- devide and conquer--------------//
+	//**********************devide and conquer***************************//
 	size_t mid = data.size() / 2;
 	const auto left = merge_sort(vector<T>(data.begin(), data.begin() + mid));
 	const auto right = merge_sort(vector<T>(data.begin() + mid, data.end()));	/*I have to check this code someday */
 	return merge(left, right);
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------
+
 int main() {
 	auto merged = merge_sort(vector<int>{8, 5, 1, 4, 2, 3, 7, 6});
-	for (int num : merged) {
+	for (const auto& num : merged) {
 		cout << num << " ";
 	}
 	return 0;
