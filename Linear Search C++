@@ -3,7 +3,7 @@
 using namespace std;
 
 template<typename T>
-int linear_search(vector<T>& vec, int len, T target)
+int linear_search(vector<T>& vec, const int& len, const T& target)
 {
 
 	for (auto& i : vec)
