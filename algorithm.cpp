@@ -1,6 +1,18 @@
 // <algorithm>
 
 
+/*Non-modifying sequence operations */
+
+// Checks if unary predicate p returns true for all elements in the range [first, last).
+template<typename InputIt, typename UnaryPredicate>
+constexpr bool all_of(InputIt first, InputIt last, UnaryPredicate p)
+{
+	return std::find_if_not(first, last, p) == last;
+}
+
+
+/*Modifying sequence operations */
+
 // Ignores all elements that are equal to value.
 template<typename InputIt, typename OutputIt, typename T>
 OutputIt remove_copy(InputIt first, InputIt last, OutputIt d_first, const T& value) 
