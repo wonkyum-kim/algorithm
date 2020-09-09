@@ -55,6 +55,10 @@ struct CircularDeque {
 		cd.push_front(temp);
 		return cd.front();
 	}
+	// empty
+	bool empty() {
+		return cd.empty() ? true : false;
+	}
 };
 
 int main()
