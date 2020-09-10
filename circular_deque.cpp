@@ -41,23 +41,31 @@ struct CircularDeque {
 	}
 	// next access
 	T next() {
-		// shift left
-		T temp = cd.front();
-		cd.pop_front();
-		cd.push_back(temp);
+		shift_left();
 		return cd.front();
 	}
 	// prev access
 	T prev() {
-		// shift right
-		T temp = cd.back();
-		cd.pop_back();
-		cd.push_front(temp);
+		cd.shift_right();
 		return cd.front();
 	}
 	// empty
 	bool empty() {
 		return cd.empty() ? true : false;
+	}
+
+	// shift_right
+	void shift_right() {
+		T temp = cd.back();
+		cd.pop_back();
+		cd.push_front(temp);
+	}
+
+	// shift_left
+	void shift_left() {
+		T temp = cd.front();
+		cd.pop_front();
+		cd.push_back(temp);
 	}
 };
 
