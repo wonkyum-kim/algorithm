@@ -1,26 +1,31 @@
+#include <vector>
 #include <iostream>
-#include <limits>
+#include <algorithm>
 
-int fibo(int n)
+
+size_t fibonacci(const size_t n)
 {
-	if (n == 0)
+	std::vector<size_t> f(n + 1);
+	if (n == 0) {
 		return 0;
-	if (n == 1)
+	}
+	else if (n == 1 || n == 2) {
 		return 1;
-	auto temp =  fibo(n - 2) + fibo(n - 1);
-	if (temp <= std::numeric_limits<int>::max())
-		return temp;
-	else
-		return std::numeric_limits<int>::min();
+	}
+	else {
+		f[0] = 0;
+		f[1] = 1;
+		f[2] = 1;
+		for (auto i = 3; i <= n; ++i) {
+			f[i] = f[i - 1] + f[i - 2];
+		}
+		return f[n];
+	}
 }
 
 int main()
 {
-	for (int i = 1; i <= std::numeric_limits<int>::max(); ++i)
-	{
-		if (fibo(i) != std::numeric_limits<int>::min())
-			std::cout << fibo(i) << ' ';
-		else
-			break;
-	}
+	size_t n = 0;
+	std::cin >> n;
+	std::cout << fibonacci(n);
 }
